@@ -56,7 +56,7 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
           <div
             id="overlay_text"
             style="position: absolute; bottom: 0px; z-index: 3; background-color: rgba(0, 0, 0, 0.6); color: white; padding: 5px">
-            ${item.metaData.VideoDuration}
+            ${this.getDuration(item.metaData.VideoDuration)}
           </div>
         </div>
       </div>
@@ -64,5 +64,12 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
     `;
 
     return element;
+  }
+
+  private getDuration(time: number): string {
+    const minutes = Math.floor(time / 60);
+    const seconds = time - minutes * 60;
+
+    return minutes + ':' + (seconds < 10 ? '0' + seconds : seconds);
   }
 }
