@@ -32,8 +32,31 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
       cellAlign: 'center',
       contain: false,
       cellSelector: '.carousel-cell',
-      pageDots: false
+      pageDots: false,
+      prevNextButtons: false
     });
+  }
+
+  canCarouselPrevious(): boolean {
+    if (this.flkty && this.carouselItems) {
+      return this.flkty.selectedIndex === 0;
+    }
+    return false;
+  }
+
+  carouselPrevious(): void {
+    this.flkty.previous();
+  }
+
+  canCarouselNext(): boolean {
+    if (this.flkty && this.carouselItems) {
+      return this.flkty.selectedIndex === this.carouselItems.length - 1;
+    }
+    return false;
+  }
+
+  carouselNext(): void {
+    this.flkty.next();
   }
 
   private getFeed(): void {

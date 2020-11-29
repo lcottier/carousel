@@ -1,2 +1,13 @@
+<div class="carousel-title">
+    <h2>Latest Videos</h2>
+    <div class="carousel-buttons">
+        <button (click)="carouselPrevious()" [disabled]="canCarouselPrevious()">
+            <i class="fa fa-arrow-left"></i>
+        </button>
+        <button (click)="carouselNext()" [disabled]="canCarouselNext()">
+            <i class="fa fa-arrow-right"></i>
+        </button>
+    </div>
+</div>
 <div class="main-carousel">
 </div>
