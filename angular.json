@@ -32,7 +32,9 @@
               "src/assets/logo/*"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/flickity/dist/flickity.css",
+              "node_modules/flickity/dist/flickity.min.css"
             ],
             "scripts": []
           },
@@ -95,7 +97,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/flickity/dist/flickity.css",
+              "node_modules/flickity/dist/flickity.min.css"
             ],
             "scripts": []
           }
