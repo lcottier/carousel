@@ -14,10 +14,16 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   subscriptions = new Subscription();
   carouselItems: Array<VideoFeedItem>;
   flkty: Flickity;
+  mobile = false;
 
   constructor(private visualisationApiService: VisualisationApiService, private renderer: Renderer2) { }
 
   ngOnInit(): void {
+
+    if (window.screen.width <= 480) { // 768px portrait
+      this.mobile = true;
+    }
+
     this.getFeed();
   }
 
