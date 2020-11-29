@@ -15,6 +15,7 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   carouselItems: Array<VideoFeedItem>;
   flkty: Flickity;
   mobile = false;
+  title = 'Latest Videos';
 
   constructor(private visualisationApiService: VisualisationApiService, private renderer: Renderer2) { }
 
@@ -68,6 +69,7 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   private getFeed(): void {
     this.subscriptions.add(this.visualisationApiService.getVideoFeed().subscribe((feedData: VideoFeedData) => {
       console.log(feedData);
+      this.title = feedData.sections[0].name;
       this.carouselItems = feedData.sections[0].itemData;
       this.carouselItems.forEach((item) => {
         this.flkty.append(this.makeCellHtml(item));
