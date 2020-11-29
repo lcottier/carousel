@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
+import * as Flickity from 'flickity';
 
-declare var Flickity: any;
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
