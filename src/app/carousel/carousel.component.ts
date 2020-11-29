@@ -31,7 +31,8 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
       // options
       cellAlign: 'center',
       contain: false,
-      cellSelector: '.carousel-cell'
+      cellSelector: '.carousel-cell',
+      pageDots: false
     });
   }
 
