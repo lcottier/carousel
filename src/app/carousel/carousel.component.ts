@@ -2,6 +2,7 @@ import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import * as Flickity from 'flickity';
 import { Subscription } from 'rxjs';
 import { VisualisationApiService } from 'src/app/shared/services/api/visualisations-api/visualisations-api.service';
+import { VideoFeedItem, VideoFeedData } from '../shared/models/video-feed-data.model';
 
 @Component({
   selector: 'app-carousel',
@@ -11,6 +12,8 @@ import { VisualisationApiService } from 'src/app/shared/services/api/visualisati
 export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
 
   subscriptions = new Subscription();
+  carouselItems: Array<VideoFeedItem>;
+  flkty: Flickity;
 
   constructor(private visualisationApiService: VisualisationApiService) { }
 
@@ -24,7 +27,7 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     // tslint:disable-next-line: no-unused-expression
-    var flkty = new Flickity('.main-carousel', {
+    this.flkty = new Flickity('.main-carousel', {
       // options
       cellAlign: 'left',
       contain: true
@@ -32,8 +35,21 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private getFeed(): void {
-    this.subscriptions.add(this.visualisationApiService.getVideoFeed().subscribe((feedData) => {
+    this.subscriptions.add(this.visualisationApiService.getVideoFeed().subscribe((feedData: VideoFeedData) => {
       console.log(feedData);
+      this.carouselItems = feedData.sections[0].itemData;
+      this.carouselItems.forEach((item) => {
+        this.flkty.append(this.makeCellHtml(item));
+      });
     }));
+  }
+
+  private makeCellHtml(item: VideoFeedItem): Element {
+    const element = document.createElement('div');
+    element.classList.add('carousel-cell');
+
+    element.innerHTML = `${item.metaData.title}`;
+
+    return element;
   }
 }

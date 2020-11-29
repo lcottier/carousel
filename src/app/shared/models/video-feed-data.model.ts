@@ -1,6 +1,6 @@
 export class VideoFeedData {
     feedMetaData: VideoFeedMetaData;
-    sections: Array<VideoFeedSections>
+    sections: Array<VideoFeedSections>;
 }
 
 export class VideoFeedMetaData {
@@ -15,7 +15,7 @@ export class VideoFeedSections {
     id: string;
     name: string;
     pagingData: VideoFeedPagingData;
-    itemData: Array<VideoFeedItems>;
+    itemData: Array<VideoFeedItem>;
 }
 
 export class VideoFeedPagingData {
@@ -26,7 +26,7 @@ export class VideoFeedPagingData {
     totalCount: number;
 }
 
-export class VideoFeedItems {
+export class VideoFeedItem {
     id: string;
     publicationData: VideoFeedItemPublicationData;
     mediaData: VideoFeedItemMediaData;

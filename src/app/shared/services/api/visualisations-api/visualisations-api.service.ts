@@ -2,6 +2,7 @@ import { HttpApiService } from '../../http-service/http-api.service';
 import { HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { VideoFeedData } from 'src/app/shared/models/video-feed-data.model';
 
 @Injectable({
     providedIn: 'root',
@@ -13,7 +14,7 @@ export class VisualisationApiService {
     constructor(private httpApiService: HttpApiService) {
     }
 
-    getVideoFeed(): Observable<any> {
-        return this.httpApiService.get<any>(this.url);
+    getVideoFeed(): Observable<VideoFeedData> {
+        return this.httpApiService.get<VideoFeedData>(this.url);
     }
 }
