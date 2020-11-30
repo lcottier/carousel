@@ -21,7 +21,7 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
 
-    if (window.screen.width <= 480) { // 768px portrait
+    if (window.innerWidth <= 480) { // 768px portrait
       this.mobile = true;
     }
 
@@ -46,7 +46,7 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
 
   canCarouselPrevious(): boolean {
     if (this.flkty && this.carouselItems) {
-      return this.flkty.selectedIndex === 0;
+      return this.flkty.selectedIndex !== 0;
     }
     return false;
   }
@@ -57,7 +57,7 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
 
   canCarouselNext(): boolean {
     if (this.flkty && this.carouselItems) {
-      return this.flkty.selectedIndex === this.carouselItems.length - 1;
+      return this.flkty.selectedIndex !== this.carouselItems.length - 1;
     }
     return false;
   }
@@ -78,7 +78,7 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private makeCellHtml(item: VideoFeedItem): Element {
-    const element = this.renderer.createElement('name');
+    const element = this.renderer.createElement('cell');
     this.renderer.addClass(element, 'carousel-cell');
 
     element.innerHTML = `
