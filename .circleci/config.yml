@@ -1,4 +1,8 @@
 version: 2.1
+workflows:
+  carousel-workflow:
+    jobs:
+      - test
 jobs:
   # The test job
   test:
@@ -10,11 +14,11 @@ jobs:
         - checkout
         # Log the current branch
         - run:
-        name: Show current branch
-        command: echo ${CIRCLE_BRANCH}
+            name: Show current branch
+            command: echo ${CIRCLE_BRANCH}
         # Restore local dependencies from cache
         - restore_cache:
-          keys:
+            keys:
               - v1-dependencies-{{ checksum "package-lock.json" }}
               - v1-dependencies-
         # Install project dependencies
