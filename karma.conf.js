@@ -18,20 +18,20 @@ module.exports = function (config) {
     jasmineHtmlReporter: {
       suppressAll: true // removes the duplicated traces
     },
-    coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/carousel'),
-      subdir: '.',
-      reporters: [
-        { type: 'html' },
-        { type: 'text-summary' }
-      ],
-      thresholds: {
-        statements: 80,
-        lines: 90,
-        branches: 90,
-        functions: 90
-      }
-    },
+    // coverageReporter: {
+    //   dir: require('path').join(__dirname, './coverage/carousel'),
+    //   subdir: '.',
+    //   reporters: [
+    //     { type: 'html' },
+    //     { type: 'text-summary' }
+    //   ],
+    //   thresholds: {
+    //     statements: 80,
+    //     lines: 90,
+    //     branches: 90,
+    //     functions: 90
+    //   }
+    // },
     coverageIstanbulReporter: {
       reports: ['html', 'lcovonly'],
       fixWebpackSourcePaths: true,
