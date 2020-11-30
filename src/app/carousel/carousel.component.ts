@@ -35,7 +35,9 @@ export class CarouselComponent implements OnInit, AfterViewInit {
       prevNextButtons: false
     });
 
-    this.getFeed();
+    if (this.section) {
+      this.getFeed();
+    }
   }
 
   canCarouselPrevious(): boolean {
