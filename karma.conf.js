@@ -26,13 +26,16 @@ module.exports = function (config) {
         { type: 'text-summary' }
       ],
       thresholds: {
-        statements: 80,
-        lines: 80,
-        branches: 80,
-        functions: 80
+        emitWarning: false, // <- this is important to make karma fail
+        global: {
+          statements: 85,
+          lines: 85,
+          branches: 85,
+          functions: 85
+        }
       }
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['progress', 'kjhtml', 'coverage'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

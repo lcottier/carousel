@@ -1,35 +1,27 @@
-import { Component, AfterViewInit, OnInit, OnDestroy, Renderer2 } from '@angular/core';
+import { Component, AfterViewInit, OnInit, Renderer2, Input } from '@angular/core';
 import * as Flickity from 'flickity';
-import { Subscription } from 'rxjs';
-import { VisualisationApiService } from 'src/app/shared/services/api/visualisations-api/visualisations-api.service';
-import { VideoFeedItem, VideoFeedData } from '../shared/models/video-feed-data.model';
+import { VideoFeedItem, VideoFeedSection } from '../shared/models/video-feed-data.model';
 
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss']
 })
-export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
+export class CarouselComponent implements OnInit, AfterViewInit {
 
-  subscriptions = new Subscription();
+  @Input() public section: VideoFeedSection;
+
   carouselItems: Array<VideoFeedItem>;
   flkty: Flickity;
   mobile = false;
   title = 'Latest Videos';
 
-  constructor(private visualisationApiService: VisualisationApiService, private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2) { }
 
   ngOnInit(): void {
-
     if (window.innerWidth <= 480) { // 768px portrait
       this.mobile = true;
     }
-
-    this.getFeed();
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -42,6 +34,10 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
       pageDots: false,
       prevNextButtons: false
     });
+
+    if (this.section) {
+      this.getFeed();
+    }
   }
 
   canCarouselPrevious(): boolean {
@@ -67,14 +63,11 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private getFeed(): void {
-    this.subscriptions.add(this.visualisationApiService.getVideoFeed().subscribe((feedData: VideoFeedData) => {
-      console.log(feedData);
-      this.title = feedData.sections[0].name;
-      this.carouselItems = feedData.sections[0].itemData;
-      this.carouselItems.forEach((item) => {
-        this.flkty.append(this.makeCellHtml(item));
-      });
-    }));
+    this.title = this.section.name;
+    this.carouselItems = this.section.itemData;
+    this.carouselItems.forEach((item) => {
+      this.flkty.append(this.makeCellHtml(item));
+    });
   }
 
   private makeCellHtml(item: VideoFeedItem): Element {

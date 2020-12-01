@@ -308,9 +308,10 @@
 </div>
 
 <div class="content" role="main">
-
-  <app-carousel></app-carousel>
-
+  <div *ngFor="let section of sections">
+    <app-carousel [section]="section">
+    </app-carousel>
+  </div>
 </div>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
